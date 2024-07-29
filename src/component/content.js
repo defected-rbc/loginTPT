@@ -2,9 +2,12 @@ import React from 'react';
 
 const Content = () => {
   const users = [
-    { id: 1, name: 'John Doe', details: 'Some details about John' },
-    { id: 2, name: 'Jane Smith', details: 'Some details about Jane' },
-    // Add more users as needed
+    { id: 1, name: 'Arunima', details: 'Sign in' },
+    { id: 2, name: 'Anuj', details: 'Git' },
+    { id: 3, name: 'Geetika', details: 'Dashboard' },
+    { id: 4, name: 'Gunjan', details: 'Integrate, Toastify' },
+    { id: 5, name: 'Kiran', details: 'Login' },
+    
   ];
 
   return (
