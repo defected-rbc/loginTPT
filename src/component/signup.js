@@ -1,12 +1,34 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Signup.css';
+import { useLocation } from 'react-router-dom'
 
 import user_icon from './Assets/person.jpeg';
 import email_icon from './Assets/e-mail.jpeg';
 import password_icon from './Assets/password.jpeg';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Signup = () => {
   const [action, setAction] = useState("Sign Up");
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state && location.state.showToast) {
+      toast.success('You have logged out successfully!');
+    }
+  }, [location.state]);
+
+  const handleLoginClick = () => {
+    if (action === "Login") {
+      // Navigate to the dashboard with state to show the toast
+      navigate('/dashboard', { state: { showToast: true } });
+    } else {
+      setAction("Login");
+    }
+  };
 
   return (
     <div className='container'>
@@ -35,8 +57,9 @@ const Signup = () => {
       )}
       <div className="submit-container">
         <div className={action === "Login" ? "submit gray" : "submit"} onClick={() => setAction("Sign Up")}>Sign Up</div>
-        <div className={action === "Sign Up" ? "submit gray" : "submit"} onClick={() => setAction("Login")}>Login</div>
+        <div className={action === "Sign Up" ? "submit gray" : "submit"} onClick={handleLoginClick}>Login</div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

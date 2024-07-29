@@ -1,23 +1,34 @@
-import React from "react";
-import "../dashboard.css";
-import Content from "./content";
-import SideBar from "./sidebar";
-import Navbar from "./navbar";
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import '../dashboard.css';
+import Content from './Content';
+import Navbar from './Navbar';
+import Sidebar from './Sidebar';
 
-const DashBoard = () => {
-  const userName = "User"; // You can replace this with actual user data
+const Dashboard = () => {
+  const userName = "User"; // Replace with actual user data if available
+  const location = useLocation();
 
-  return (
+  useEffect(() => {
+    if (location.state && location.state.showToast) {
+      toast.success('You have logged in successfully!');
+    }
+  }, [location.state]);
+
+  return ( 
     <div className="dashboard">
       <Navbar userName={userName}/>
       <div className="main-content">
-        <SideBar/>
+        <Sidebar/>
         <div className="content">
           <Content/>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
 
-export default DashBoard;
+export default Dashboard;
